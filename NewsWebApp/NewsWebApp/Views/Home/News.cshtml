@@ -1,0 +1,55 @@
+﻿@model IEnumerable<NewsLibrary.Models.NewsContain>
+@{
+	Layout = "";
+}
+<table id="newsTableInfo" class="display" style="width:50%; display: inline-block">
+	<thead>
+		<tr>
+			<th>
+				Источник
+			</th>
+			<th>
+				Название новости
+			</th>
+			<th>
+				Описание новости
+			</th>
+			<th>
+				Дата публикации
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model != null)
+		{
+			@foreach (var item in Model)
+			{
+				var shortDate = item.PubDate.ToString("f");
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.Source)
+					</td>
+					<td>
+						<a href="@Html.DisplayFor(modelItem => item.Link)" target="_blank">
+							@Html.DisplayFor(modelItem => item.Title)
+						</a>
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Description)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => shortDate)
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table> 
+<script>
+	$(document).ready(function () {
+		$('#newsTableInfo').DataTable({
+			dom: 'p',
+			"order": [] 
+		});
+	}); 
+</script>

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<NewsLibrary.Models.NewsContain>
+<div>
+	<h1>Новостная лента</h1>
+	<div style="display: block ruby">
+		<p style="margin-right: 0.5%">Источник ленты</p>
+		<select id="source" name="source" style="height: 2em">
+			<option value="all">Все источники</option>
+			@foreach (var item in Model.Select(x => x.Source).Distinct())
+			{
+				<option>
+					@Html.DisplayFor(modelItem => item)
+				</option>
+			}
+		</select>
+	</div>
+	<div style="display: block ruby; margin-top: 0.5%">
+		<div>
+			<input type="radio" id="inp-date" name="drone" value="PubDate" checked>
+			<label for="date">Сортировать по дате</label>
+		</div>
+		<div>
+			<input type="radio" id="inp-source" name="drone" value="Source">
+			<label for="source">Сортировать по источнику</label>
+		</div>
+	</div>
+	<button class="btn-show" id="btn-show">Просмотреть</button>
+	<ol class="modal-bg" style="margin-top: 0.5%" id="newsTable"></ol>
+</div>
+
+<script>
+	$('#btn-show').on('click', function () { 
+		LoadInfo(); 
+	});
+</script>
