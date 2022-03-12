@@ -24,4 +24,10 @@
     <ProjectReference Include="..\..\NewsLibrary\NewsLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="env\env.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

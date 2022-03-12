@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NewsLibrary.Contexts;
+using NewsLibrary;
 
 namespace NewsWebApp
 {
-	public class Startup
+    public class Startup
 	{
 		public Startup(IConfiguration configuration)
 		{
@@ -17,7 +17,9 @@ namespace NewsWebApp
 		public IConfiguration Configuration { get; }
 		 
 		public void ConfigureServices(IServiceCollection services)
-		{ 
+		{
+			var connectionString = Configuration.GetSection("ConnectionString").Value;
+			services.AddTransient(x => new Repository(connectionString));
 			services.AddControllersWithViews();
 		}
 		 

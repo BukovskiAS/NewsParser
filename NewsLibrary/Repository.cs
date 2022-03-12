@@ -15,7 +15,7 @@ namespace NewsLibrary
             "server=localhost;Port=3306;UserId=root;Password=root1234;database=NewsDB;Connection Timeout=360;CharSet=utf8mb4;Persist Security Info=True";
         #endregion
 
-        public Repository() => _context = new Context(dbConnectionString);
+        public Repository() => _context = new Context(dbConnectionString); 
 
         public Repository(string connection)
         {

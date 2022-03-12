@@ -11,9 +11,9 @@ namespace NewsWebApp.Controllers
 {
     public class HomeController : Controller
 	{
-		private readonly Repository _repository = new();  
+		private readonly Repository _repository;
 
-		public HomeController() { }
+		public HomeController(Repository repository) => _repository = repository;
 		
 		public async Task<IActionResult> Index() => View(await _repository.GetNewsAsync());
 

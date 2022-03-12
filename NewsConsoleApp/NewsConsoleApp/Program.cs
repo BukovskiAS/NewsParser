@@ -7,13 +7,13 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Threading;
 using AngleSharp.Html.Dom;
-using System.Text;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace NewsConsoleApp
 {
-    class Program
+	class Program
 	{
 		#region Fields 
 		private static readonly Dictionary<string,string> urlList = new() {
@@ -40,13 +40,20 @@ namespace NewsConsoleApp
 			}
 			catch 
 			{
-                //Console.WriteLine($"{url.Key} \t {e.Message}");
+                //ignore
 			}
-		} 
-		
+		}
+
+		static Repository GetRepository()
+		{
+			using var sr = new StreamReader("./env/env.json");
+			var config = JsonConvert.DeserializeObject<ConfigModel>(sr.ReadToEnd());
+			return new Repository(config.ConnectionString);
+		}
+
 		static void SaveActualNews(IHtmlDocument document, string source)
 		{ 
-			var repository = new Repository();
+			var repository = GetRepository();
 			var newsList = new List<NewsContain>();
 
 			foreach (IElement element in document.QuerySelectorAll("item"))

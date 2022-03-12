@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Configuration;
 using NewsLibrary.Models;
 
 namespace NewsLibrary.Contexts
@@ -11,8 +9,11 @@ namespace NewsLibrary.Contexts
 
         public DbSet<NewsContain> NewsContains { get; set; }
 
-        public Context(string connection) =>
+        public Context(string connection)
+        {
             _connectionString = connection;
+            Database.EnsureCreated();
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

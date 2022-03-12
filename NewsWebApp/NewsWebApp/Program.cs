@@ -1,15 +1,10 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace NewsWebApp
 {
-	public class Program
+    public class Program
 	{
 		public static void Main(string[] args)
 		{
@@ -18,6 +13,10 @@ namespace NewsWebApp
 
 		public static IHostBuilder CreateHostBuilder(string[] args) =>
 			Host.CreateDefaultBuilder(args)
+				.ConfigureAppConfiguration((hostingContext, config) => 
+				{ 
+					config.AddJsonFile("./env/env.json"); 
+				})
 				.ConfigureWebHostDefaults(webBuilder =>
 				{
 					webBuilder.UseStartup<Startup>();
